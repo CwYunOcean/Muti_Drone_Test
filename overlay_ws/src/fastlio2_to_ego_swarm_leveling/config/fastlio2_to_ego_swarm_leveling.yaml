@@ -1,0 +1,12 @@
+/**:
+  ros__parameters:
+    input_odom_topic: "/drone_1/aft_mapped_to_init"
+    input_cloud_topic: "/drone_1/cloud_registered"
+    output_odom_topic: "/drone_1/aft_mapped_to_init_level"
+    output_cloud_topic: "/drone_1/cloud_registered_level"
+    world_frame_id: "world"
+    output_frame_id: "camera_init_level"
+    output_child_frame_id: "body_level"
+    level_rpy_rad: [0.0, 0.5235987755982988, 0.0]
+    world_origin_xyz: [0.0, 0.0, 0.0]
+    world_origin_yaw_rad: 0.0

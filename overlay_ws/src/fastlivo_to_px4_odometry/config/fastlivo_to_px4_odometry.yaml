@@ -1,0 +1,11 @@
+/fastlivo_to_px4_odometry:
+  ros__parameters:
+    input_topic: "/aft_mapped_to_init"
+    output_topic: "/fmu/in/vehicle_visual_odometry"
+    world_axis: [1, 0, 2]
+    world_sign: [1.0, 1.0, -1.0]
+    body_axis: [0, 1, 2]
+    body_sign: [1.0, -1.0, -1.0]
+    body_extrinsic_translation_m: [0.0, 0.0, 0.0]
+    body_extrinsic_rpy_rad: [0.0, -0.519, 0.0]
+    quality: 100

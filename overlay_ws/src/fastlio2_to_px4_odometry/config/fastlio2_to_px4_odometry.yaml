@@ -1,0 +1,13 @@
+/fastlio2_to_px4_odometry:
+  ros__parameters:
+    input_topic: "/drone_1/aft_mapped_to_init_level"
+    output_topic: "/drone_1/fmu/in/vehicle_visual_odometry"
+    world_axis: [1, 0, 2]
+    world_sign: [1.0, 1.0, -1.0]
+    body_axis: [0, 1, 2]
+    body_sign: [1.0, -1.0, -1.0]
+    body_extrinsic_translation_m: [0.0, 0.0, 0.0]
+    # Mount tilt is compensated once in fastlio2_to_ego_swarm_leveling
+    # (level_rpy_rad); keep this bridge a pure ENU->NED axis mapper.
+    body_extrinsic_rpy_rad: [0.0, 0.0, 0.0]
+    quality: 100

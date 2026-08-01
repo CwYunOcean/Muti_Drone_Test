@@ -1,0 +1,67 @@
+# Git worktrees and editor state
+.worktrees/
+.agents
+.codex
+.vscode/
+.idea/
+
+# Python and shell tooling state
+__pycache__/
+*.py[cod]
+*.swp
+.pytest_cache/
+
+# ROS 2 build products, wherever their workspace is located
+build/
+install/
+log/
+
+# Flight records, bags, maps, and generated calibration output
+*.bag
+*.db3
+*.db3-shm
+*.db3-wal
+*.mcap
+*.pcd
+*.ply
+*.tlog
+*.tlog.*
+*.ulg
+
+# Local per-robot configuration. Commit only the corresponding .example files.
+/config/robot.env
+/config/robot.params.yaml
+/config/MID360_config.json
+/config/*.local.env
+/config/*.local.yaml
+/config/*.local.json
+
+# Machine exports and non-project material
+/mav.parm
+/RELEASE_COMMIT
+/RELEASE_METADATA
+/RELEASE_WORKTREE_STATUS
+/drone_agent_skills_bundle/
+/drone_agent_skills_bundle.tar.gz
+/hc/
+/809d21aa-da29-43c9-ac8f-573bbae135e9.png
+
+# Upstream source trees are restored from manifests, not committed into this meta-repository.
+/livox_ws/
+/slam_ws/src/*
+!/slam_ws/src/README.md
+/slam_ws/local/
+/nav_ws/src/*
+!/nav_ws/src/README.md
+
+# px4_msgs is an upstream dependency and must be locked to the PX4 firmware release.
+/overlay_ws/src/px4_msgs/
+/uav_formation_ws/src/px4_msgs/
+
+# Historical driver files with one aircraft's Ethernet addresses.
+/overlay_ws/src/fast_lio2_mid360_bringup/config/MID360_config_drone_1.json
+/overlay_ws/src/fast_lio2_mid360_bringup/config/livox_sdk2_mid360_drone_1.json
+/overlay_ws/src/fast_livo2_mid360_bringup/config/MID360_config_drone_1.json
+
+# Platform-specific metadata
+.DS_Store

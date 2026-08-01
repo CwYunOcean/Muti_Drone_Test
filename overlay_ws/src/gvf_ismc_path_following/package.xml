@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>gvf_ismc_path_following</name>
+  <version>0.0.1</version>
+  <description>Three-leaf guidance vector field core for ISMC path following.</description>
+  <maintainer email="dev@example.com">Drone SLAM Maintainers</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <build_depend>eigen3_cmake_module</build_depend>
+  <build_depend>Eigen3</build_depend>
+  <depend>geometry_msgs</depend>
+  <depend>gvf_path_following_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>quadrotor_msgs</depend>
+  <depend>rclcpp</depend>
+  <depend>visualization_msgs</depend>
+  <build_export_depend>eigen3_cmake_module</build_export_depend>
+  <build_export_depend>Eigen3</build_export_depend>
+
+  <test_depend>ament_cmake_gtest</test_depend>
+  <test_depend>ament_cmake_pytest</test_depend>
+  <test_depend>python3-yaml</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

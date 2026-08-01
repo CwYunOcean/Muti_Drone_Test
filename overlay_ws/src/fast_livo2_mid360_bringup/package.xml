@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>fast_livo2_mid360_bringup</name>
+  <version>0.0.1</version>
+  <description>Project-owned bring-up package for FAST-LIVO2 MID360 launch/config contracts, including pure LIO and MID360+D435i LIVO flows.</description>
+  <maintainer email="dev@example.com">Drone SLAM Maintainers</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <exec_depend>ament_index_python</exec_depend>
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>fast_livo</exec_depend>
+  <exec_depend>livox_ros_driver2</exec_depend>
+  <exec_depend>realsense2_camera</exec_depend>
+  <exec_depend>tf2_ros</exec_depend>
+
+  <test_depend>ament_cmake_pytest</test_depend>
+  <test_depend>ament_index_python</test_depend>
+  <test_depend>python3-yaml</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

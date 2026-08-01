@@ -1,0 +1,7 @@
+# This source is the ROS 2 fork used by the local navigation workspace.
+# Validate this pin with the overlay packages before publishing a flight release.
+repositories:
+  ego-swarm-ros2:
+    type: git
+    url: https://github.com/legubiao/ego-swarm-ros2.git
+    version: 2d0925ad37d9eb761bbcc5d61b4f672f1b0838c9

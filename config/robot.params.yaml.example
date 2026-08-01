@@ -1,0 +1,12 @@
+# Copy to config/robot.params.yaml and set only values measured for this airframe.
+# The file is loaded after project defaults by run_ego_single_real.sh.
+
+/fastlio2_to_ego_swarm_leveling:
+  ros__parameters:
+    level_rpy_rad: [0.0, 0.5235987755982988, 0.0]
+    world_origin_xyz: [0.0, 0.0, 0.0]
+    world_origin_yaw_rad: 0.0
+
+/position_cmd_to_px4_bridge:
+  ros__parameters:
+    target_system: 1

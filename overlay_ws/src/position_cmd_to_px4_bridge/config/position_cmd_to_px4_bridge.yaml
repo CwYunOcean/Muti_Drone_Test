@@ -1,0 +1,21 @@
+/position_cmd_to_px4_bridge:
+  ros__parameters:
+    enabled: true
+    command_topic: "/drone_1_planning/pos_cmd"
+    offboard_mode_topic: "/drone_1/fmu/in/offboard_control_mode"
+    trajectory_setpoint_topic: "/drone_1/fmu/in/trajectory_setpoint"
+    vehicle_command_topic: "/drone_1/fmu/in/vehicle_command"
+    vehicle_odometry_topic: "/drone_1/fmu/out/vehicle_odometry"
+    vehicle_status_topic: ""
+    fastlivo_odom_topic: "/drone_1/aft_mapped_to_init_level"
+    warmup_cycles: 10
+    auto_request_offboard_and_arm: false
+    target_system: 2
+    command_timeout_ms: 300
+    status_timeout_ms: 1000
+    odom_timeout_ms: 300
+    position_control_enabled: true
+    velocity_control_enabled: true
+    use_acceleration_feedforward: true
+    world_axis: [1, 0, 2]
+    world_sign: [1.0, 1.0, -1.0]
