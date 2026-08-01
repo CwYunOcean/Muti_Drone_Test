@@ -12,12 +12,12 @@ Integration repo for a Jetson-based UAV running ROS2 Humble on Ubuntu 22.04 ARM6
 |-----------|---------|-------------|
 | `overlay_ws/src/` | Local packages, adapters, bringup wrappers, configs | **Edit freely** — this is project-owned code |
 | `slam_ws/src/` | Upstream FAST-LIO2, EGO-Swarm, Livox driver | Read-only; patches go in `patches/` |
-| `nav_ws/src/` | Upstream ego-swarm-ros2 | Read-only |
+| `nav_ws/src/ego-swarm-ros2/` | Vendored EGO-Swarm navigation baseline | Shared source; changes require review and testing |
 | `livox_ws/src/` | Livox SDK2 + livox_ros_driver2 | Read-only (uses its own `build.sh`) |
 | `isacc_ws/src/` | Isaac ROS packages | Read-only |
 | `GVF_ws/` | MATLAB DDSMC reference scripts | Reference only |
 
-`manifests/` holds pinned upstream `.repos` files (bootstrap with `vcs import slam_ws/src < manifests/slam_ws.repos`). Do not commit build artifacts, rosbags, map dumps, or sensor recordings. Keep machine-specific edits (e.g., lidar IPs) local unless they belong in a tracked runbook or config template.
+`manifests/` holds pinned external upstream `.repos` files (bootstrap with `vcs import slam_ws/src < manifests/slam_ws.repos`). `nav_ws/src/ego-swarm-ros2` is already present after a root clone; its provenance and GPLv3 license obligations are recorded in `nav_ws/UPSTREAM.md`. Do not commit build artifacts, rosbags, map dumps, or sensor recordings. Keep machine-specific edits (e.g., lidar IPs) local unless they belong in a tracked runbook or config template.
 
 ## Docs & Skills
 
@@ -27,8 +27,9 @@ Integration repo for a Jetson-based UAV running ROS2 Humble on Ubuntu 22.04 ARM6
 
 ## Git Workflow
 
-- `main` holds docs, manifests, and reviewed overlay code; use project-local `.worktrees/<branch>` for feature branches
-- Keep upstream workspaces pristine — prefer overlays/adapters; unavoidable upstream edits go in `patches/` with the upstream commit SHA they apply to
+- `main` holds docs, manifests, vendored navigation source, and reviewed overlay code; use project-local `.worktrees/<branch>` for feature branches
+- Keep external upstream workspaces pristine — prefer overlays/adapters; unavoidable upstream edits go in `patches/` with the upstream commit SHA they apply to
+- Changes below `nav_ws/src/ego-swarm-ros2` are shared source changes. Keep the upstream `LICENSE`, state material deviations in the commit, and rebuild navigation-dependent packages before merge.
 - PRs should state which workspace/package changed, list the exact colcon or smoke-test commands run, and note hardware assumptions
 
 ## Build Commands

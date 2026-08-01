@@ -51,8 +51,6 @@ log/
 /slam_ws/src/*
 !/slam_ws/src/README.md
 /slam_ws/local/
-/nav_ws/src/*
-!/nav_ws/src/README.md
 
 # px4_msgs is an upstream dependency and must be locked to the PX4 firmware release.
 /overlay_ws/src/px4_msgs/

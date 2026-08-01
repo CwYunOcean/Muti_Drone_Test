@@ -10,11 +10,12 @@ This repository tracks:
 - design docs, plans, runbooks, and upstream source pins
 - local overlay code under `overlay_ws/src`
 - local formation controller code under `uav_formation_ws/src/distribute_control`
+- the vendored EGO-Swarm navigation source under `nav_ws/src/ego-swarm-ros2`
 - reproducible patches when upstream edits are unavoidable
 
 This repository does not track:
 
-- large upstream clones
+- external upstream clones other than the vendored EGO-Swarm baseline
 - ROS build artifacts
 - rosbags, map dumps, or sensor recordings
 
@@ -22,9 +23,10 @@ This repository does not track:
 
 - `livox_ws/src/` - dedicated workspace for `livox_ros_driver2`
 - `slam_ws/src/` - upstream SLAM and planning sources
+- `nav_ws/src/ego-swarm-ros2/` - vendored EGO-Swarm navigation source
 - `overlay_ws/src/` - local packages, launch wrappers, adapters, and configs
 - `uav_formation_ws/src/` - local formation controller and its tests
-- `manifests/` - pinned upstream source manifests
+- `manifests/` - pinned external upstream source manifests
 - `config/*.example` - templates copied to ignored, per-robot configuration files
 - `patches/` - local patch files if upstream modification becomes unavoidable
 - `docs/superpowers/specs/` - design docs
@@ -35,7 +37,9 @@ This repository does not track:
 
 - `main` holds docs, manifests, and reviewed overlay code.
 - Use project-local `.worktrees/<branch>` for feature branches.
-- Keep upstream sources pristine; prefer overlays or patch files over direct edits.
+- Keep external upstream sources pristine; prefer overlays or patch files over direct edits.
+- Treat `nav_ws/src/ego-swarm-ros2` as shared flight source: changes require
+  review and testing, never per-aircraft edits. See `nav_ws/UPSTREAM.md`.
 - If an upstream edit is unavoidable, store the exact patch under `patches/` and record the upstream commit SHA it applies to.
 - Do not change tracked launch/config files on an aircraft. Put robot identity,
   MID360 IPs, and world-frame calibration in ignored files below `config/`.
