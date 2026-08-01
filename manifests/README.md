@@ -4,13 +4,13 @@ Import the pinned external sources into an empty workspace source directory:
 
 ```bash
 vcs import livox_ws/src < manifests/livox_ws.repos
-vcs import slam_ws/src < manifests/slam_ws.repos
 vcs import uav_formation_ws/src < manifests/uav_formation_ws.repos
 ```
 
-`nav_ws/src/ego-swarm-ros2` is vendored directly in this repository rather
-than restored from a manifest. A clean clone already contains the navigation
-source; see `nav_ws/UPSTREAM.md` for its reference upstream and license.
+`nav_ws/src/ego-swarm-ros2` and `slam_ws/src` are vendored directly in this
+repository rather than restored from manifests. A clean clone already contains
+the navigation and SLAM sources; see `nav_ws/UPSTREAM.md` and
+`slam_ws/UPSTREAM.md` for their reference upstreams and licenses.
 
 `px4_msgs` is intentionally not listed for `overlay_ws`. The existing overlay
 and formation workspaces contain different message definitions, and PX4 DDS

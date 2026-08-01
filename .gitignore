@@ -46,11 +46,17 @@ log/
 /hc/
 /809d21aa-da29-43c9-ac8f-573bbae135e9.png
 
-# Upstream source trees are restored from manifests, not committed into this meta-repository.
+# External source trees are restored from manifests, not committed into this repository.
 /livox_ws/
-/slam_ws/src/*
-!/slam_ws/src/README.md
 /slam_ws/local/
+
+# Vendored SLAM runtime outputs and airframe calibration data.
+/slam_ws/src/FAST-Calib-ROS2/calib_data/
+/slam_ws/src/FAST-Calib-ROS2/output/
+/slam_ws/src/FAST-LIVO2/Log/
+/slam_ws/src/FAST_LIO/Log/
+/slam_ws/src/FAST_LIO/PCD/
+/slam_ws/src/rpg_vikit/ername
 
 # px4_msgs is an upstream dependency and must be locked to the PX4 firmware release.
 /overlay_ws/src/px4_msgs/

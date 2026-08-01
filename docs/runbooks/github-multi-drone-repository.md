@@ -3,14 +3,15 @@
 ## Repository Boundary
 
 `Drone_SLAM` version-controls project-owned ROS packages, the shared
-EGO-Swarm navigation source, launch scripts, documentation, tests, source
-manifests, and example configuration files. It does not version-control
+EGO-Swarm navigation and SLAM sources, launch scripts, documentation, tests,
+source manifests, and example configuration files. It does not version-control
 generated ROS output, logs, bags, PX4 parameter exports, hardware calibration,
 or external upstream trees restored from manifests.
 
 ```text
 Drone_SLAM/
   overlay_ws/src/                 project-owned bridge and bringup packages
+  slam_ws/src/                    vendored shared SLAM and driver source
   nav_ws/src/ego-swarm-ros2/      vendored shared EGO-Swarm navigation source
   uav_formation_ws/src/distribute_control/
                                   project-owned formation controller
@@ -45,12 +46,13 @@ Use the HTTPS remote instead when SSH keys are not configured. Do not force
 push the `main` branch. GitHub branch protection should require pull requests
 for changes that affect flight code or launch behavior.
 
-The `.gitignore` intentionally excludes `slam_ws/src`, `livox_ws`, the two
-vendored `px4_msgs` copies, build products, rosbags, telemetry logs, and the
-current PX4 parameter export. `nav_ws/src/ego-swarm-ros2` is an intentional
-exception: it is shared source and must appear in source-change commits. If an
-external upstream tree or generated artifact appears in the staged file list,
-stop and correct the ignore rule before committing.
+The `.gitignore` intentionally excludes `livox_ws`, the two vendored
+`px4_msgs` copies, build products, rosbags, telemetry logs, calibration output,
+and the current PX4 parameter export. `nav_ws/src/ego-swarm-ros2` and
+`slam_ws/src` are intentional exceptions: they are shared source and must
+appear in source-change commits. If an external upstream tree or generated
+artifact appears in the staged file list, stop and correct the ignore rule
+before committing.
 
 ## New Aircraft Setup
 
@@ -62,7 +64,6 @@ git clone git@github.com:<organization>/Drone_SLAM.git ~/Drone_SLAM
 cd ~/Drone_SLAM
 
 vcs import livox_ws/src < manifests/livox_ws.repos
-vcs import slam_ws/src < manifests/slam_ws.repos
 vcs import uav_formation_ws/src < manifests/uav_formation_ws.repos
 
 cp config/robot.env.example config/robot.env
@@ -78,26 +79,29 @@ repository. Record the chosen SHA in `manifests/` before calling that build a
 release. Rebuild every affected workspace after changing `px4_msgs`.
 
 Build in dependency order after the external source import. The exact packages
-depend on the active stack, but the usual order is Livox, SLAM, navigation
+depend on the active stack, but the usual order is Livox, SLAM and navigation
 (already present in the clone), overlay, then formation. Source each completed
 workspace before building the next one.
 
 ## Existing Aircraft Migration
 
-Before an existing aircraft first pulls the commit that vendors navigation
-source, preserve any ignored local copy for comparison. The pull may replace
-files below `nav_ws/src/ego-swarm-ros2` with the shared baseline.
+Before an existing aircraft first pulls the commits that vendor navigation and
+SLAM source, preserve any ignored local copies for comparison. The pull may
+replace files below `nav_ws/src/ego-swarm-ros2` and `slam_ws/src` with the
+shared baselines.
 
 ```bash
 cd ~/Drone_SLAM
 cp -a nav_ws/src/ego-swarm-ros2 ~/ego-swarm-ros2-before-vendoring
+cp -a slam_ws/src ~/slam-source-before-vendoring
 git pull --ff-only origin main
 ```
 
-Compare the backup with the tracked source before deleting it. A difference
+Compare the backups with the tracked source before deleting them. A difference
 that is required by all aircraft belongs in a reviewed shared commit; a change
 that only describes one aircraft belongs in the ignored `config/` files, not
-in EGO-Swarm source.
+in EGO-Swarm or SLAM source. Keep SLAM logs, PCD files, calibration output, and
+LiDAR IP-specific configuration local.
 
 ## Only Per-Aircraft Edits
 
@@ -164,8 +168,8 @@ ground-level topic health check before flight.
 
 When a field change is genuinely reusable, commit it from a development
 machine as a feature branch and review it before merging. This includes a
-change below `nav_ws/src/ego-swarm-ros2`. When it describes only one airframe,
-move it to `config/robot.env`,
+change below `nav_ws/src/ego-swarm-ros2` or `slam_ws/src`. When it describes
+only one airframe, move it to `config/robot.env`,
 `config/MID360_config.json`, or `config/robot.params.yaml` instead of editing
 tracked source.
 

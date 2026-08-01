@@ -1,10 +1,10 @@
 # Repository Guidelines
 
 ## Project Structure & Module Organization
-Treat this repository as a thin ROS 2 integration repo. Put project-owned code in `overlay_ws/src/`; local packages there include bringup wrappers and PX4 bridge adapters, each with package-local `test/` directories. Treat `nav_ws/`, `slam_ws/`, and `isacc_ws/` as upstream-heavy workspaces: prefer configuration, wrappers, or adapters over direct edits. Keep source pins in `manifests/`, operational notes in `docs/runbooks/`, design docs in `docs/superpowers/`, and reusable launch helpers in `scripts/`. If an upstream patch is unavoidable, store it under `patches/` with the target upstream SHA.
+Treat this repository as a ROS 2 flight-stack repository. Put project-owned code in `overlay_ws/src/`; local packages there include bringup wrappers and PX4 bridge adapters, each with package-local `test/` directories. `nav_ws/src/ego-swarm-ros2` and `slam_ws/src/` are vendored, upstream-heavy shared baselines: prefer configuration, wrappers, or adapters over direct edits, and never put per-aircraft settings there. Treat `isacc_ws/` and `livox_ws/` as external workspaces. Keep external source pins in `manifests/`, operational notes in `docs/runbooks/`, design docs in `docs/superpowers/`, and reusable launch helpers in `scripts/`. If an external upstream patch is unavoidable, store it under `patches/` with the target upstream SHA.
 
 ## Build, Test, and Development Commands
-Bootstrap upstream sources with `vcs import slam_ws/src < manifests/slam_ws.repos`. For workspace dependencies, run `rosdep install --from-paths src --ignore-src -r -y` inside the workspace you are building. Typical local build:
+After cloning, `nav_ws/src` and `slam_ws/src` already contain the shared source baseline. Bootstrap external Livox sources with `vcs import livox_ws/src < manifests/livox_ws.repos`. For workspace dependencies, run `rosdep install --from-paths src --ignore-src -r -y` inside the workspace you are building. Typical local build:
 
 ```bash
 cd overlay_ws

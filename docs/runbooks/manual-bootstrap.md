@@ -37,15 +37,17 @@ sudo apt install -y \
   ros-humble-realsense2-description
 ```
 
-## 3. Import Upstream Sources
+## 3. Import External Sources
 
 ```bash
-mkdir -p ~/Drone_SLAM/livox_ws/src ~/Drone_SLAM/slam_ws/src ~/Drone_SLAM/overlay_ws/src
+mkdir -p ~/Drone_SLAM/livox_ws/src
 cd ~/Drone_SLAM
 vcs import livox_ws/src < manifests/livox_ws.repos
-vcs import slam_ws/src < manifests/slam_ws.repos
-git -C slam_ws/src/FAST_LIO submodule update --init --recursive
 ```
+
+`slam_ws/src` and `nav_ws/src/ego-swarm-ros2` are shared source baselines
+already present after cloning `Drone_SLAM`. Do not re-import or initialize Git
+submodules inside those directories; use the versions tracked by `main`.
 
 ## 4. Build Livox-SDK2
 
